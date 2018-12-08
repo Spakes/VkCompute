@@ -1,0 +1,10 @@
+**.bak
+**.mtl
+**.orig
+**/*.dll
+**/*.exe
+
+*.log
+
+[Bb]uild/
+
