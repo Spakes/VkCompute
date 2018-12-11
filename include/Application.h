@@ -9,7 +9,6 @@
 #define APPLICATION_NAME "VkCompute";
 
 class Device;
-class Buffer;
 
 class Application
 {
@@ -25,7 +24,6 @@ public:
 private:
     // Initializes the instance, device and queues
     void Init();
-    Buffer* CreateBuffer(size_t size, bool isHostVisible = false);
 
     std::vector<VkExtensionProperties> mExtensionProps;
     std::vector<VkLayerProperties> mLayerProps;

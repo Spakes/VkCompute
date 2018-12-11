@@ -5,11 +5,17 @@
 
 #include <vector>
 
+class Buffer;
+
 class Device
 {
 public:
     Device(VkPhysicalDevice physicalDevice, std::vector<const char*>& enabledExtensions, std::vector<const char*>& enabledLayers);
     ~Device();
+
+    VkDevice GetVkDevice() const { return mDevice; }
+    uint32_t GetMemoryTypeIndex(uint32_t memTypeBits, VkMemoryPropertyFlags memProperties) const;
+    Buffer* CreateBuffer(size_t size, bool isHostVisible = false);
 
 private:
     VkPhysicalDevice mPhysicalDevice;

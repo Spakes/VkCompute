@@ -1,5 +1,6 @@
 #include "Device.h"
 #include "Error.h"
+#include "Buffer.h"
 
 Device::Device(
     VkPhysicalDevice physicalDevice,
@@ -81,4 +82,25 @@ Device::Device(
 Device::~Device()
 {
 
+}
+
+Buffer* Device::CreateBuffer(size_t size, bool isHostVisible)
+{
+    Buffer* buffer = new Buffer(this, size, isHostVisible);
+    return buffer;
+}
+
+uint32_t Device::GetMemoryTypeIndex(uint32_t memTypeBits, VkMemoryPropertyFlags memProps) const
+{
+    for (uint32_t i = 0; i < mMemoryProps.memoryTypeCount; i++)
+    {
+        if ((memTypeBits & (1 << i)) &&
+            ((mMemoryProps.memoryTypes[i].propertyFlags & memProps) == memProps))
+        {
+            return i;
+        }
+    }
+
+    printfError(__LINE__, __FILE__, "Required memory type not found");
+    return -1;
 }

@@ -94,9 +94,16 @@ void Application::Init()
 
     mPhysicalDevice = physicalDevices[0];
     mpDevice = new Device(mPhysicalDevice, mEnabledExtensions, mEnabledLayers);
-}
 
-Buffer* Application::CreateBuffer(size_t size, bool isHostVisible)
-{
-    return nullptr;
+    Buffer* buffer = mpDevice->CreateBuffer(1000, true);
+
+    // The number of resources bound in each shader stage must match the number of
+    // VkDescriptorSetLayoutBinding structs
+    VkDescriptorSetLayoutBinding descriptorSetLayoutBinding[] =
+    {
+        { 0, VK_DESCRIPTOR_TYPE_STORAGE_BUFFER, 1, VK_SHADER_STAGE_COMPUTE_BIT, 0 },
+    };
+    
+    // First study writing compute shaders and then come back to descriptors
+
 }

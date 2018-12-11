@@ -1,4 +1,18 @@
 #include "Error.h"
+#include <stdarg.h>
+
+#define ERR_BUFF_VA_LEN 101
+void printfError(int line, const char* file, const char* fmtStr, ...)
+{
+    const size_t len = strlen(fmtStr) + ERR_BUFF_VA_LEN;
+    char* buff = (char*)calloc(len, sizeof(char));
+
+    va_list args;
+    va_start(args, fmtStr);
+    vsnprintf(buff, len, fmtStr, args);
+    std::cout << ERR_STR << buff << " at line " << line << " in file " << file;
+    va_end(args);
+}
 
 const char* vkResultToCString(VkResult errorCode)
 {
