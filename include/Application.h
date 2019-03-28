@@ -31,7 +31,11 @@ private:
     std::vector<const char*> mEnabledLayers;
 
     VkInstance mInstance;
+    VkDebugReportCallbackEXT mDebugReportCallback;
     VkPhysicalDevice mPhysicalDevice;
+    VkDescriptorSetLayout mDescriptorSetLayout;
+    VkDescriptorPool mDescriptorPool;
+    VkDescriptorSet mDescriptorSet;
     Device* mpDevice;
 };
 

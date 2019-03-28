@@ -74,8 +74,12 @@ Device::Device(
     deviceCreateInfo.ppEnabledExtensionNames = enabledExtensions.data();*/
     deviceCreateInfo.enabledLayerCount = enabledLayers.size();
     deviceCreateInfo.ppEnabledLayerNames = enabledLayers.data();
+    VkPhysicalDeviceFeatures deviceFeatures = {};
+    deviceCreateInfo.pEnabledFeatures = &deviceFeatures;
 
     VK_CHECK_ERR(vkCreateDevice(physicalDevice, &deviceCreateInfo, nullptr, &mDevice));
+
+    // Get a handle to the created queue.
     vkGetDeviceQueue(mDevice, mQueueFamilyIndices.compute, 0, &(mQueues.compute));
 }
 
